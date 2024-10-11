@@ -7,11 +7,12 @@
 /* -------------------------------------------------------------------------- */
 #include <WiFiManager.h>          //https://github.com/tzapu/WiFiManager
 #include <Preferences.h>
+#include <PubSubClient.h>
 
 /* -------------------------------------------------------------------------- */
 /*                                   Macros                                   */
 /* -------------------------------------------------------------------------- */
-
+#define LED 2
 
 /* -------------------------------------------------------------------------- */
 /*                                Enumerations                                */
@@ -21,6 +22,7 @@
 /* -------------------------------------------------------------------------- */
 /*                                  Variables                                 */
 /* -------------------------------------------------------------------------- */
+unsigned long timestamp = 0;
 
 /* ----------------------- MQTT client default values ----------------------- */
 char mqtt_server[40];
@@ -28,7 +30,7 @@ char mqtt_port[6] = "8080";
 char mqtt_user[34] = "";
 char mqtt_password[34] = "";
 
-/* ----------------------- MQTT WiFiManager Definition ---------------------- */
+/* -----------------------  WiFiManager MQTT Definition ---------------------- */
 WiFiManager wm;
 WiFiManagerParameter custom_mqtt_server("server", "mqtt server", mqtt_server, 40);
 WiFiManagerParameter custom_mqtt_port("port", "mqtt port", mqtt_port, 6);
@@ -37,6 +39,11 @@ WiFiManagerParameter custom_mqtt_password("mqtt_password", "MQTT Password", mqtt
 
 /* -------------- Preference Object to store data in the memory ------------- */
 Preferences preferences;  
+
+/* ------------------------------- MQTT Client ------------------------------ */
+WiFiClient espClient;
+PubSubClient mqttClient(espClient);
+
 
 /* -------------------------------------------------------------------------- */
 /*                               Data Structures                              */
@@ -54,4 +61,6 @@ Preferences preferences;
 void saveConfigCallback () ;
 void MQTT_paramInit();
 void wm_init(bool _reset);
+void MQTT_callback(char* topic, byte* message, unsigned int length) ;
+void MQTT_reconnect() ;
 #endif
