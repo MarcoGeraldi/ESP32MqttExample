@@ -29,6 +29,7 @@ This project demonstrates how to use an ESP32 board as an MQTT client, allowing 
 - ESP32 development board
 - USB cable
 
+![image](https://github.com/user-attachments/assets/94458f26-6eeb-4d60-a9dd-23cb3c0074d0)
 
 ### Software Requirements
 - Arduino IDE or PlatformIO
@@ -49,12 +50,12 @@ git clone https://github.com/MarcoGerladi/ESP32MqttExample.git
 ```
 
 ## Setting Up the Environment
-1. Open Arduino IDE or PlatformIO.
-2. Install the necessary libraries:
+- Open Arduino IDE or PlatformIO.
+- Install the necessary libraries:
   - PubSubClient
   - WiFiManager (https://github.com/tzapu/WiFiManager)
   - Preferences
-Upload the code to your ESP32 board.
+- Upload the code to your ESP32 board.
 
 
 ## Usage
