@@ -1,6 +1,5 @@
 #include "main.h"
 
-
 // Create the list of commands
 tinyCLI::Command commands[] = {    
     {CLI_HELP,                  "Shows this help message"       , nullptr},  // Placeholder for help function
@@ -9,8 +8,8 @@ tinyCLI::Command commands[] = {
     {CLI_MQTT_SERVER,           "Set MQTT broker IP address"    , cli_mqtt_server},
     {CLI_MQTT_PORT,             "Set MQTT broker port"          , cli_mqtt_port},
     {CLI_MQTT_USER,             "Set MQTT username"             , cli_mqtt_user},
-    {CLI_MQTT_PASSWORD,         "Set MQTT username"             , cli_mqtt_password},   
-    {CLI_WIFI_CONFIG_PORTAL,    "Set Config Portal"             , cli_config_portal},
+    {CLI_MQTT_PASSWORD,         "Set MQTT password"             , cli_mqtt_password},   
+    {CLI_WIFI_CONFIG_PORTAL,    "Enable Config Portal"             , cli_config_portal},
     {CLI_WIFI_SSID,             "Set WiFi SSID"                 , nullptr},
     {CLI_WIFI_PSWD,             "Set WiFi Password"             , nullptr},
 
@@ -41,7 +40,7 @@ void setup() {
 
 void loop() {
   /* ------------------------- avoid overflow of timer ------------------------ */
-  if (timestamp > millis()) timestamp = 0;// put your main code here, to run repeatedly:
+  if (timestamp > millis()) timestamp = 0;
   
   /* ----------------------- Process Command line inputs ---------------------- */
   commandLine.processInput();
@@ -53,13 +52,15 @@ void loop() {
   if (WL_CONNECTED == WiFi.status()){
     /* ------------------------------ MQTT Process ------------------------------ */
     if (!mqttClient.connected()){
+      /* --------------------- Try to reconnect to MQTT Broker -------------------- */
       if ( millis() - timestamp  > 5000) {
-          MQTT_reconnect();   //Try to reconnect each 5s 
+          MQTT_reconnect();   
           timestamp = millis();
         }
     } else {
-      mqttClient.loop();
-      mqttClient.publish("esp32/temperature", "19°C");
+        /* ---------------------------- Publish MQTT Data --------------------------- */
+        mqttClient.loop();
+        mqttClient.publish("esp32/temperature", "19°C");
     } 
   }  
 }
@@ -68,7 +69,7 @@ void loop() {
 ////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////
 
-// Example command functions with parameters
+
 void saveConfigCallback () {
   /* --------------------------- Store MQTT settings -------------------------- */
   preferences.putString(PREF_MQTT_SERVER,    custom_mqtt_server.getValue());
