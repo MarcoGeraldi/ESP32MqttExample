@@ -3,16 +3,16 @@
 
 // Create the list of commands
 tinyCLI::Command commands[] = {    
-    {"help",            "Shows this help message"       , nullptr},  // Placeholder for help function
-    {"reset",           "Reset the device"              , reset},
-    {"mqtt_info",       "Prints stored mqtt settings"   , mqtt_info},
-    {"mqtt_server",     "Set MQTT broker IP address"    , nullptr},
-    {"mqtt_port",       "Set MQTT broker port"          , nullptr},
-    {"mqtt_user",       "Set MQTT username"             , nullptr},
-    {"mqtt_password",   "Set MQTT username"             , nullptr},   
-    {"config_portal",   "Set Config Portal"             , nullptr},
-    {"wifi_ssid",       "Set WiFi SSID"                 , nullptr},
-    {"wifi_pswd",       "Set WiFi Password"             , nullptr},
+    {CLI_HELP,                  "Shows this help message"       , nullptr},  // Placeholder for help function
+    {CLI_RESET,                 "Reset the device"              , cli_reset},
+    {CLI_MQTT_INFO,             "Prints stored mqtt settings"   , cli_mqtt_info},
+    {CLI_MQTT_SERVER,           "Set MQTT broker IP address"    , cli_mqtt_server},
+    {CLI_MQTT_PORT,             "Set MQTT broker port"          , cli_mqtt_port},
+    {CLI_MQTT_USER,             "Set MQTT username"             , cli_mqtt_user},
+    {CLI_MQTT_PASSWORD,         "Set MQTT username"             , cli_mqtt_password},   
+    {CLI_WIFI_CONFIG_PORTAL,    "Set Config Portal"             , cli_config_portal},
+    {CLI_WIFI_SSID,             "Set WiFi SSID"                 , nullptr},
+    {CLI_WIFI_PSWD,             "Set WiFi Password"             , nullptr},
 
 };
 
@@ -163,7 +163,7 @@ void MQTT_reconnect() {
   _mqtt_server.trim();
 
   if (!mqttClient.connected()) {
-    Serial.print("Attempting MQTT connection...");
+    Serial.println("Attempting MQTT connection...");
     // Attempt to connect
     mqttClient.setServer(_mqtt_server.c_str(), _mqtt_port.toInt());
       

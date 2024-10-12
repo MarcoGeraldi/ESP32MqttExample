@@ -1,13 +1,15 @@
 #ifndef _IOT_CLI_H
 #define _IOT_CLI_H
 
-
 /* -------------------------------------------------------------------------- */
 /*                                Include Files                               */
 /* -------------------------------------------------------------------------- */
 #include <Preferences.h>
+#include <WiFiManager.h>   
+
 #include "tinyCLI.h"
 #include "definitions.h"
+
 /* -------------------------------------------------------------------------- */
 /*                                   Macros                                   */
 /* -------------------------------------------------------------------------- */
@@ -23,7 +25,7 @@
 /* -------------------------------------------------------------------------- */
 /* -------------- Preference Object to store data in the memory ------------- */
 extern Preferences preferences;  
-
+extern WiFiManager wm;
 /* -------------------------------------------------------------------------- */
 /*                               Data Structures                              */
 /* -------------------------------------------------------------------------- */
@@ -40,7 +42,11 @@ extern Preferences preferences;
 /* -------------------------------------------------------------------------- */
 void sayHello(String params);
 void controlLED(String params);
-void reset(String params);
-void mqtt_info(String params);
-
+void cli_reset(String params);
+void cli_config_portal(String params);
+void cli_mqtt_info(String params);
+void cli_mqtt_server(String params);
+void cli_mqtt_port(String params);
+void cli_mqtt_user(String params);
+void cli_mqtt_password(String params);
 #endif

@@ -14,6 +14,17 @@
 #define PREF_MQTT_PORT      "mqtt_port"
 #define PREF_MQTT_USER      "mqtt_user"
 #define PREF_MQTT_PASSWORD  "mqtt_password"
+
+#define CLI_HELP                "help"       
+#define CLI_RESET               "reset"       
+#define CLI_MQTT_INFO           "mqtt_info"        
+#define CLI_MQTT_SERVER         "mqtt_server"  
+#define CLI_MQTT_PORT           "mqtt_port"         
+#define CLI_MQTT_USER           "mqtt_user"         
+#define CLI_MQTT_PASSWORD       "mqtt_password"
+#define CLI_WIFI_CONFIG_PORTAL  "config_portal"
+#define CLI_WIFI_SSID           "wifi_ssid"
+#define CLI_WIFI_PSWD           "wifi_pswd"
 /* -------------------------------------------------------------------------- */
 /*                                Enumerations                                */
 /* -------------------------------------------------------------------------- */
